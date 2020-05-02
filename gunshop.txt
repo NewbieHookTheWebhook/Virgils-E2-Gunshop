@@ -1,0 +1,85 @@
+@name Gunshop
+@inputs EGP:wirelink User:entity Stock1 Stock2
+@outputs UseB1 UseB2
+
+EGP:egpBox(1, vec2(256,256),vec2(512,512))
+EGP:egpColor(1, vec(255, 168, 0))
+
+EGP:egpText(2, "Virgil's Gunshop", vec2(15,5))
+EGP:egpFont(2,"Coolvetica")
+EGP:egpSize(2, 75)
+EGP:egpColor(2, vec(255,255,255))
+
+EGP:egpRoundedBox(3, vec2(256,175),vec2(350,100))
+EGP:egpColor(3, vec(0,0,0))
+
+EGP:egpText(4, "AK-47 | 1500$", vec2(100,150))
+EGP:egpSize(4, 60)
+EGP:egpFont(4, "Coolvetica")
+EGP:egpColor(4, vec(0,0,0))
+
+EGP:egpRoundedBox(5, vec2(256,300),vec2(350,100))
+
+EGP:egpText(6, "M4 | 1500$", vec2(135,275))
+EGP:egpSize(6, 60)
+EGP:egpFont(6, "Coolvetica")
+EGP:egpColor(6, vec(0,0,0))
+
+
+
+interval(100)
+
+UseB1 = 0
+UseB2 = 0
+
+if(Stock1) {
+    EGP:egpColor(3, vec(255,255,255))
+    
+    
+}
+else
+{
+    EGP:egpColor(3, vec(50,50,50))
+   
+}
+
+if(Stock2) {
+    EGP:egpColor(5, vec(255,255,255))
+}
+else {
+    EGP:egpColor(5, vec(50,50,50))
+}
+
+
+
+Cursor = EGP:egpCursor(User) #Defines Cursor
+
+function number button(Num){
+    return inrange(Cursor,EGP:egpPos(Num),EGP:egpPos(Num) + EGP:egpSize(Num)) #Function for buttons.
+}
+
+if(button(3)) {
+    if(Stock1) {
+        moneyRequest(User, 1500, "AK-47")
+    }
+}
+
+if(button(5)) {
+    if(Stock2) {
+        moneyRequest(User, 1500, "M4")
+    }
+}
+
+if(moneyClk("AK-47")) {
+    
+        UseB2 = 1
+    
+    
+}
+if(moneyClk("M4")) {
+    
+        UseB1 = 1
+    
+    
+}
+
